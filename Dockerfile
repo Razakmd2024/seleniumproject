@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get update \
     && apt-get install -y google-chrome-stable
 
-# Install specific version of ChromeDriver
-RUN CHROMEDRIVER_VERSION=121.0.6167.85 \
+# Install matching version of ChromeDriver
+RUN CHROMEDRIVER_VERSION=131.0.6778.204 \
     && wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip" \
     && unzip chromedriver-linux64.zip \
     && mv chromedriver-linux64/chromedriver /usr/local/bin/ \
