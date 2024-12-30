@@ -2,7 +2,6 @@ from flask import Flask
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 import os
 
 app = Flask(__name__)
@@ -12,11 +11,12 @@ def get_chrome_driver():
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu')
     
-    # Install Chrome driver
-    service = Service(ChromeDriverManager().install())
+    # Specify the ChromeDriver path (matches Dockerfile installation location)
+    service = Service(executable_path='/usr/local/bin/chromedriver')
     
-    # Create driver
+    # Create driver with service and options
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
@@ -24,7 +24,7 @@ def get_chrome_driver():
 def scrape_example():
     try:
         driver = get_chrome_driver()
-        driver.get('https://google.com')
+        driver.get('https://example.com')
         title = driver.title
         driver.quit()
         return f"Successfully scraped title: {title}"
