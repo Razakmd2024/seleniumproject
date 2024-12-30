@@ -24,7 +24,7 @@ def get_chrome_driver():
 def scrape_example():
     try:
         driver = get_chrome_driver()
-        driver.get('https://example.com')
+        driver.get('https://epanchayat.telangana.gov.in/cs')
         title = driver.title
         driver.quit()
         return f"Successfully scraped title: {title}"
